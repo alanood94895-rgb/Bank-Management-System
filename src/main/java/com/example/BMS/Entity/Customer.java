@@ -1,29 +1,34 @@
 package com.example.BMS.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
-@Data
 @Entity
-@Table
+@Data
+@Table(name = "customers")
 public class Customer {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer customerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long customerId;
 
     @NotBlank(message = "Customer name cannot be empty")
     private String customerName;
+
     @Column(unique = true)
-    @NotBlank(message = "Account number cannot be empty")
+    @NotBlank(message = "Account number is required")
     private String accountNumber;
+
     @PositiveOrZero(message = "Balance cannot be negative")
-    private Double balance;
+    private double balance;
+
     @Email(message = "Invalid email format")
-    @NotBlank(message = "Email cannot be empty")
     private String email;
+
     private String phoneNumber;
+
+    public Customer() {
+    }
 
 }
